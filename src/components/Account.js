@@ -7,27 +7,42 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import SignUp from './SignUp';
 import Login from './Login';
 const Stack = createNativeStackNavigator();
-function Account({navigation}) {
-    const onHandlePress = ()=>{
-        navigation.navigate('Login')
-    }
-  return (
-    <View style={styles.body}>
-         {/* <Stack.Navigator>
-          <Stack.Screen 
-            name='SignUp' 
-            component={SignUp}
-            options={{ title: 'Ajio' }}/>
-        </Stack.Navigator> */}
+
+const AccountDetails = ({navigation})=>{
+    return(<View style={styles.body}>
         <View style={styles.container}>
             <View style={styles.icon}>
                 <FontAwesome5 name='user' size={20} color='#fff'/>
             </View>
-            <Pressable style={styles.pressablebutton} onPress={onHandlePress}>
+            <Pressable onPress={()=>navigation.navigate('LogIn')} style={styles.pressablebutton} >
                 <Text style={styles.text}>Sign in / Join</Text>
             </Pressable>
         </View>
-    </View>
+    </View>)
+}
+function Account() {
+  return (
+         <Stack.Navigator initialRouteName='AccountDetails'>
+            <Stack.Screen
+                name='AccountDetails' 
+                component={AccountDetails}
+                options={{
+                    headerShown:false
+                }}/>
+            {/* <Stack.Screen 
+                name='SignUp' 
+                component={SignUp}
+                options={{
+                    headerShown:false
+                }}/>
+            <Stack.Screen 
+                name='LogIn' 
+                component={Login}
+                options={{
+                    headerShown:false,
+                }}/> */}
+        </Stack.Navigator>
+        
   )
 }
 

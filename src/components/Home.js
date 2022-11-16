@@ -4,6 +4,9 @@ import { Input, Center, NativeBaseProvider, HStack, ScrollView } from "native-ba
 import { FlatList, Text, View, useWindowDimensions, StyleSheet, Image } from "react-native";
 import SignUp from "./SignUp";
 import Login from "./Login";
+import Wishlist from "./wishlist";
+import Bag from "./Bag";
+import Account from "./Account";
 const Drawer = createDrawerNavigator();
 const Example = () => {
   return <Input shadow={2} _light={{
@@ -24,8 +27,7 @@ const Example = () => {
     }
   }} placeholder="Search by Products,brands.." />;
 };
-
-const Home = () => {
+const HomeDetails = ()=>{
     const {width} = useWindowDimensions();
     const data = [
         {
@@ -60,7 +62,6 @@ const Home = () => {
         },
     ]
     return (
-        <NativeBaseProvider>
         <Center flex={0.2} px="3">
             <Example />
             <ScrollView  horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -81,7 +82,6 @@ const Home = () => {
                 renderItem={({item}) => (
                     <View style={[styles.container, {width}]}>
                         <Image style={styles.image} source={{uri:'https://images.app.goo.gl/RuQaQMRAtsZGZqfN8'}}/>
-                        {/* <Text>{item.title}</Text> */}
                     </View>
                     )} 
                 horizontal 
@@ -91,6 +91,17 @@ const Home = () => {
             />
             
         </Center>
+    )
+}
+const Home = () => {
+    return (
+        <NativeBaseProvider>
+            <Drawer.Navigator initialRouteName="HomeDetails">
+                <Drawer.Screen name="HomeDetails" component={HomeDetails}/>
+                <Drawer.Screen name="Wishlist" component={Wishlist}/>
+                <Drawer.Screen name="Bag" component={Bag}/>
+                <Drawer.Screen name="Account" component={Account}/>
+            </Drawer.Navigator>
         </NativeBaseProvider>
     );
 };

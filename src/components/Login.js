@@ -31,7 +31,7 @@ const Example = ({ navigation }) => {
             Forget Password?
           </Link>
         </FormControl>
-        <Button mt="2" colorScheme="indigo" onPress={() => navigation.navigate('Tabs')}>
+        <Button mt="2" colorScheme="indigo" onPress={() => navigation.navigate('Drawer')}>
           Sign in
         </Button>
         <HStack mt="6" justifyContent="center">

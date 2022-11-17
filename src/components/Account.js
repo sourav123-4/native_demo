@@ -8,79 +8,84 @@ import SignUp from './SignUp';
 import Login from './Login';
 const Stack = createNativeStackNavigator();
 
-const AccountDetails = ({navigation})=>{
-    return(<View style={styles.body}>
+const AccountDetails = ({ navigation }) => {
+    return (<View style={styles.body}>
         <View style={styles.container}>
             <View style={styles.icon}>
-                <FontAwesome5 name='user' size={20} color='#fff'/>
+                <Text style={styles.iconName}>SM</Text>
             </View>
-            <Pressable onPress={()=>navigation.navigate('LogIn')} style={styles.pressablebutton} >
-                <Text style={styles.text}>Sign in / Join</Text>
-            </Pressable>
+            <View style={styles.details}>
+                <Text style={styles.name}>Sourav</Text>
+                <Text style={styles.email}>souravmahanty12@gmail.com</Text>
+                <Text style={styles.phoneNo}>7384750135</Text>
+            </View>
+            <View style={styles.edit}>
+                <Text style={{ color: 'blue' }}>Edit</Text>
+            </View>
         </View>
     </View>)
 }
 function Account() {
-  return (
-         <Stack.Navigator initialRouteName='AccountDetails'>
+    return (
+        <Stack.Navigator initialRouteName='AccountDetails'>
             <Stack.Screen
-                name='AccountDetails' 
+                name='AccountDetails'
                 component={AccountDetails}
                 options={{
-                    headerShown:false
-                }}/>
-            {/* <Stack.Screen 
-                name='SignUp' 
-                component={SignUp}
-                options={{
-                    headerShown:false
-                }}/>
-            <Stack.Screen 
-                name='LogIn' 
-                component={Login}
-                options={{
-                    headerShown:false,
-                }}/> */}
+                    headerShown: false
+                }} />
         </Stack.Navigator>
-        
-  )
+    )
 }
 
-export default Account
+export default Account;
 
 const styles = StyleSheet.create({
-    body:{
-        flex:1,
+    body: {
+        flex: 1,
     },
-    container:{
-        flex:0.2,
-        flexDirection:'row',
-        justifyContent:'space-between',
-        backgroundColor:'#D1D1D1',
-        alignItems:'center',
-        padding:20
+    container: {
+        flex: 0.2,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: '#D1D1D1',
+        alignItems: 'center',
+        alignContent: 'center',
+        padding: 20
     },
-    icon:{
-        flex:0.2,
-        alignContent:'center',
-        alignItems:'center',
-        justifyContent:'center',
-        backgroundColor:'black',
-        height:'50%',
-        borderRadius:60,
+    icon: {
+        flex: 0.8,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'black',
+        height: '70%',
+        borderRadius: 60,
     },
-    pressablebutton:{
-        flex:0.6,
-        alignContent:'center',
-        backgroundColor:'black',
-        padding:12,
-        alignItems:'center',
-        justifyContent:'center',
-        borderRadius:10
+    iconName: {
+        fontSize: 25,
+        color: 'white',
+        fontWeight: '800',
     },
-    text:{
-        fontSize:15,
-        fontWeight:'400',
-        color:'white'
+    details: {
+        padding: 1
+    },
+    name: {
+        fontSize: 16,
+        fontWeight: 'bold'
+    },
+    email: {
+        fontStyle: 'italic',
+        fontWeight: '600'
+    },
+    edit: {
+        padding: 2
+    },
+    phoneNo: {
+        color: 'blue'
+    },
+    text: {
+        fontSize: 15,
+        fontWeight: '400',
+        color: 'white'
     }
 })

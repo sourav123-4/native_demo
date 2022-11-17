@@ -48,25 +48,17 @@ function Tabs({ navigation }) {
         component={Home}
         options={{
           tabBarLabel: 'Home',
-          title: 'Ajio',
           headerShown: false,
-          headerLeft: ({ color, size, focused }) => {
-            return (
-              <TouchableOpacity >
-                <FontAwesome5 name='bars' size={20} style={{ marginLeft: 20 }} />
-              </TouchableOpacity>
-            )
-          }
         }}
       />
       <Tab.Screen
         name='Wishlist'
-        component={wishlist} />
+        component={wishlist} options={{ headerShown: false }} />
       <Tab.Screen
         name='Bag'
-        component={Bag} />
+        component={Bag} options={{ headerShown: false }} />
       <Tab.Screen
-        options={{ headerTitle: 'My Account' }}
+        options={{ headerShown: false }}
         name='Account'
         component={Account} />
     </Tab.Navigator>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Input, NativeBaseProvider } from "native-base";
-import { SafeAreaView, StyleSheet, TextInput, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet } from 'react-native';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
 const Example = () => {
     return <Input shadow={2} _light={{
@@ -40,6 +41,5 @@ const Styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        paddingTop: 30
     }
 }) 

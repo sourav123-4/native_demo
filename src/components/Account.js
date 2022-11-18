@@ -1,14 +1,23 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Text, View, StyleSheet, Pressable } from 'react-native';
-import { Avatar, NativeBaseProvider } from "native-base";
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import SignUp from './SignUp';
-import Login from './Login';
+import { Text, View, StyleSheet, Button } from 'react-native';
+import { signOut } from 'firebase/auth'
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../firebase';
 const Stack = createNativeStackNavigator();
 
 const AccountDetails = ({ navigation }) => {
+    const [data, setData] = useState([])
+    const logOut = async () => {
+        await signOut(auth);
+        navigation.navigate('LogIn')
+    };
+    useEffect(() => {
+        onAuthStateChanged(auth, (currentuser) => {
+            setData(currentuser);
+        });
+    }, []);
+    console.log("data", data?.email)
     return (<View style={styles.body}>
         <View style={styles.container}>
             <View style={styles.icon}>
@@ -16,12 +25,15 @@ const AccountDetails = ({ navigation }) => {
             </View>
             <View style={styles.details}>
                 <Text style={styles.name}>Sourav</Text>
-                <Text style={styles.email}>souravmahanty12@gmail.com</Text>
+                <Text style={styles.email}>{data?.email}</Text>
                 <Text style={styles.phoneNo}>7384750135</Text>
             </View>
             <View style={styles.edit}>
                 <Text style={{ color: 'blue' }}>Edit</Text>
             </View>
+        </View>
+        <View style={styles.buttonView}>
+            <Button style={styles.button} onPress={logOut} title='LogOut' />
         </View>
     </View>)
 }
@@ -54,11 +66,11 @@ const styles = StyleSheet.create({
         padding: 20
     },
     icon: {
-        flex: 0.8,
+        flex: 0.4,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'black',
-        height: '70%',
+        height: '60%',
         borderRadius: 60,
     },
     iconName: {
@@ -87,5 +99,13 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: '400',
         color: 'white'
+    },
+    buttonView: {
+        alignItems: 'center',
+    },
+    button: {
+        color: 'white'
+        // width: 300,
+        // borderRadius: 18
     }
 })

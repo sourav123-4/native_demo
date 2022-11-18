@@ -1,7 +1,23 @@
 import * as React from "react";
 import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, NativeBaseProvider } from "native-base";
-
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from "../../firebase";
 const Example = ({ navigation }) => {
+  const [email, setEmail] = React.useState("")
+  const [password, setPassword] = React.useState("")
+  const login = async () => {
+    // navigation.navigate('Drawer')
+    try {
+      const user = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      if (user) navigation.navigate('Drawer')
+    } catch (e) {
+      console.log("error is:- ", e);
+    }
+  };
   return <Center w="100%">
     <Box safeArea p="2" py="8" w="90%" maxW="290">
       <Heading size="lg" fontWeight="600" color="coolGray.800" _dark={{
@@ -18,11 +34,11 @@ const Example = ({ navigation }) => {
       <VStack space={3} mt="5">
         <FormControl>
           <FormControl.Label>Email ID</FormControl.Label>
-          <Input />
+          <Input onChangeText={(val) => setEmail(val)} />
         </FormControl>
         <FormControl>
           <FormControl.Label>Password</FormControl.Label>
-          <Input type="password" />
+          <Input onChangeText={(val) => setPassword(val)} type="password" />
           <Link _text={{
             fontSize: "xs",
             fontWeight: "500",
@@ -31,7 +47,7 @@ const Example = ({ navigation }) => {
             Forget Password?
           </Link>
         </FormControl>
-        <Button mt="2" colorScheme="indigo" onPress={() => navigation.navigate('Drawer')}>
+        <Button mt="2" colorScheme="indigo" onPress={login}>
           Sign in
         </Button>
         <HStack mt="6" justifyContent="center">
